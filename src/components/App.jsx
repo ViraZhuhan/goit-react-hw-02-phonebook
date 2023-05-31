@@ -52,8 +52,8 @@ class App extends Component {
       return;
     }
 
-    this.setState(prevState => ({
-      contacts: [newContacts, ...prevState.contacts],
+    this.setState(({contacts}) => ({
+      contacts: [newContacts, ...contacts],
     }));
   };
 
