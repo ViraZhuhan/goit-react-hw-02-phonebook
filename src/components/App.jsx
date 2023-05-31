@@ -44,7 +44,7 @@ class App extends Component {
     };
 
     const isFindName = this.state.contacts.find(
-      contact => contact.toLowerCase() === name.toLowerCase()
+      contact => contact.name.toLowerCase() === name.toLowerCase()
     );
 
     if (isFindName) {
