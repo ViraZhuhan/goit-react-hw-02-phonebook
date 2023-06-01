@@ -37,24 +37,22 @@ class App extends Component {
   };
 
   formSubmitData = ({ name, number }) => {
-    const newContacts = {
-      id: nanoid(),
-      name,
-      number,
-    };
-
     const isFindName = this.state.contacts.find(
-      contact => contact.name === name.toLowerCase()
-    );
+      contact => contact.name.toLowerCase() === name.toLowerCase());
 
     if (isFindName) {
       alert(`${name} is already in contacts !`);
       return;
+    } else {
+      const newContacts = {
+        id: nanoid(),
+        name,
+        number,
+      };
+      this.setState(({ contacts }) => ({
+        contacts: [newContacts, ...contacts],
+      }));
     }
-
-    this.setState(({contacts}) => ({
-      contacts: [newContacts, ...contacts],
-    }));
   };
 
   changeFilter = e => {
@@ -81,9 +79,9 @@ class App extends Component {
 
     return (
       <Container>
-        <Title />
+        <Title title="Phonebook"/>
         <ContactForm onSubmit={this.formSubmitData} />
-        <ContactsTitle />
+        <ContactsTitle title="Contacts"/>
         <Filter onChange={this.changeFilter} value={this.state.filter} />
         <ContactsList contacts={visibleFilters} onDelete={this.deleteContact} />
       </Container>

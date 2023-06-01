@@ -1,27 +1,9 @@
-import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { List, Item, Button } from './ContactList.styled';
 
-class ContactsList extends Component {
-  static propTypes = {
-    contacts: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string,
-        name: PropTypes.string,
-        number: PropTypes.string,
-      })
-    ).isRequired,
-  };
-
-  state = {
-    contacts: this.props.contacts,
-  };
-
-  render() {
-    const { contacts, onDelete } = this.props;
-
-    return (
-      <List>
+const ContactsList =({ contacts, onDelete }) => {
+  return (
+    <List>
         {contacts.map(({ name, number, id }) => (
           <Item key={id}>
             <p>
@@ -31,8 +13,18 @@ class ContactsList extends Component {
           </Item>
         ))}
       </List>
-    );
-  }
+  )
 }
+
+ContactsList.propTypes = {
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      name: PropTypes.string,
+      number: PropTypes.string,
+    })
+  ).isRequired,
+  onDelete: PropTypes.func.isRequired,
+};
 
 export default ContactsList;
